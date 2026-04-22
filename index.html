@@ -3,139 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brandon Van | Filmmaker & Screenwriter</title>
+    <title>Brandon Van | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Video background handling */
-        .video-container {
+        .video-wrapper {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
+            pointer-events: none; /* Prevents users from accidentally clicking the pause button */
             overflow: hidden;
-            background-color: black; /* Fallback */
+            background: black;
         }
-        
-        .video-background {
+
+        /* This "scales up" the iframe to hide the Google Drive UI bars */
+        .video-wrapper iframe {
+            width: 100vw;
+            height: 56.25vw; /* 16:9 Aspect Ratio */
+            min-height: 100vh;
+            min-width: 177.77vh; /* 16:9 Aspect Ratio */
             position: absolute;
             top: 50%;
             left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-            filter: brightness(0.4) grayscale(20%); /* Cinematic styling */
+            transform: translate(-50%, -50%) scale(1.2); /* Scale(1.2) crops the Drive buttons out */
+            filter: brightness(0.4);
         }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, border 0.3s ease;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
-<body class="bg-black text-white font-sans selection:bg-white selection:text-black">
+<body class="bg-black text-white font-sans">
 
-    <div class="video-container">
-        <video autoplay muted loop playsinline class="video-background">
-            <source src="https://drive.google.com/uc?export=download&id=1N6wwKtKjsd8Wya-945sJrayHqFzxDWTP" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+    <div class="video-wrapper">
+        <iframe src="https://drive.google.com/file/d/1N6wwKtKjsd8Wya-945sJrayHqFzxDWTP/preview?autoplay=1" 
+                allow="autoplay"></iframe>
     </div>
 
     <nav class="p-8 flex justify-between items-center relative z-10">
         <h1 class="text-xl font-bold tracking-[0.3em] uppercase">Brandon Van</h1>
-        <div class="hidden md:flex space-x-8 text-xs uppercase tracking-widest">
-            <a href="#" class="hover:text-gray-400 transition">Work</a>
-            <a href="#" class="hover:text-gray-400 transition">Scripts</a>
-            <a href="mailto:your-email@example.com" class="hover:text-gray-400 transition">Contact</a>
-        </div>
     </nav>
 
-    <main class="h-[80vh] flex flex-col justify-center items-center text-center px-4 relative z-10">
-        <h2 class="text-6xl md:text-9xl font-black mb-4 tracking-tighter">FILMMAKER</h2>
-        <p class="text-sm md:text-lg max-w-2xl text-gray-400 uppercase tracking-[0.5em]">Creative Direction &bull; Scriptwriting</p>
+    <main class="h-[70vh] flex flex-col justify-center items-center text-center px-4 relative z-10">
+        <h2 class="text-6xl md:text-8xl font-black mb-4 tracking-tighter">FILMMAKER</h2>
+        <p class="text-xs md:text-sm max-w-2xl text-gray-400 uppercase tracking-[0.5em]">Creative Direction &bull; Scriptwriting</p>
     </main>
 
-    <section class="py-24 px-8 relative z-10 bg-gradient-to-t from-black to-transparent">
-        <div class="max-w-6xl mx-auto">
-            <h3 class="text-2xl font-light mb-16 text-center tracking-[0.2em] uppercase">The Script Vault</h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="glass-card p-10 rounded-sm">
-                    <span class="text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-4 block italic">Feature Length / Noir</span>
-                    <h4 class="text-2xl font-bold mb-4 uppercase">Untitled Noir Project</h4>
-                    <p class="text-gray-400 leading-relaxed mb-8 font-light">A detective story set in the neon-soaked streets of a forgotten city. Exploring themes of memory and structural decay.</p>
-                    <button onclick="openModal('Untitled Noir Project')" class="border border-white px-8 py-3 text-xs uppercase tracking-widest hover:bg-white hover:text-black transition duration-500">Request Access</button>
-                </div>
-
-                <div class="glass-card p-10 rounded-sm">
-                    <span class="text-[10px] text-gray-400 uppercase tracking-[0.2em] mb-4 block italic">Short Film / Experimental</span>
-                    <h4 class="text-2xl font-bold mb-4 uppercase">The Last Frame</h4>
-                    <p class="text-gray-400 leading-relaxed mb-8 font-light">An aging projectionist discovers a hidden message in a vintage film reel. A love letter to celluloid.</p>
-                    <button onclick="openModal('The Last Frame')" class="border border-white px-8 py-3 text-xs uppercase tracking-widest hover:bg-white hover:text-black transition duration-500">Request Access</button>
-                </div>
+    <section class="py-24 px-8 relative z-10">
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="glass-card p-8 rounded-sm">
+                <h4 class="text-xl font-bold mb-4 uppercase">Script Vault</h4>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Request access to my latest feature and short film screenplays.</p>
+                <button onclick="openModal('Script Vault')" class="border border-white px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition">Enter Vault</button>
             </div>
         </div>
     </section>
 
-    <div id="requestModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6 backdrop-blur-sm">
-        <div class="bg-zinc-950 p-8 md:p-12 rounded-sm max-w-md w-full border border-zinc-800 shadow-2xl">
-            <h3 class="text-xl font-bold mb-1 uppercase tracking-widest">Request Script</h3>
-            <p id="scriptTitle" class="text-zinc-500 text-xs mb-8 uppercase tracking-tighter italic"></p>
-            
-            <form action="https://formspree.io/f/your-id-here" method="POST" class="space-y-6">
-                <div>
-                    <label class="text-[10px] uppercase tracking-widest text-zinc-500 block mb-2">Name</label>
-                    <input type="text" name="name" required class="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white transition">
-                </div>
-                <div>
-                    <label class="text-[10px] uppercase tracking-widest text-zinc-500 block mb-2">Email Address</label>
-                    <input type="email" name="_replyto" required class="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white transition">
-                </div>
-                <div>
-                    <label class="text-[10px] uppercase tracking-widest text-zinc-500 block mb-2">Message / Intent</label>
-                    <textarea name="message" rows="3" class="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white transition resize-none"></textarea>
-                </div>
-                
-                <div class="flex flex-col space-y-4 pt-4">
-                    <button type="submit" class="w-full py-4 bg-white text-black font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-zinc-200 transition">Submit Request</button>
-                    <button type="button" onclick="closeModal()" class="text-[10px] uppercase tracking-widest text-zinc-500 hover:text-white transition">Back to site</button>
-                </div>
+    <div id="requestModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6 backdrop-blur-md">
+        <div class="bg-zinc-950 p-8 rounded-sm max-w-md w-full border border-zinc-800">
+            <h3 class="text-lg font-bold mb-4 uppercase tracking-widest">Request Access</h3>
+            <form action="https://formspree.io/f/your-id-here" method="POST" class="space-y-4">
+                <input type="text" name="name" placeholder="Name" class="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white">
+                <input type="email" name="email" placeholder="Email" class="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white">
+                <button type="submit" class="w-full py-3 bg-white text-black font-bold uppercase text-[10px] tracking-widest">Send Request</button>
+                <button type="button" onclick="closeModal()" class="w-full text-[10px] text-zinc-500 uppercase py-2">Cancel</button>
             </form>
         </div>
     </div>
 
     <script>
-        function openModal(title) {
-            document.getElementById('scriptTitle').innerText = title;
-            document.getElementById('requestModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Stop scrolling when modal is open
-        }
-        function closeModal() {
-            document.getElementById('requestModal').classList.add('hidden');
-            document.body.style.overflow = 'auto'; // Resume scrolling
-        }
-        
-        // Close modal if clicking outside the box
-        window.onclick = function(event) {
-            let modal = document.getElementById('requestModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
+        function openModal(title) { document.getElementById('requestModal').classList.remove('hidden'); }
+        function closeModal() { document.getElementById('requestModal').classList.add('hidden'); }
     </script>
-
 </body>
 </html>
