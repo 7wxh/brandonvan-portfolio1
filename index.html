@@ -3,83 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brandon Van | Portfolio</title>
+    <title>Brandon Van | Filmmaker</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .video-wrapper {
+        /* Video background handling for YouTube */
+        .video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            pointer-events: none; /* Prevents users from accidentally clicking the pause button */
             overflow: hidden;
-            background: black;
+            background-color: black;
         }
-
-        /* This "scales up" the iframe to hide the Google Drive UI bars */
-        .video-wrapper iframe {
-            width: 100vw;
-            height: 56.25vw; /* 16:9 Aspect Ratio */
-            min-height: 100vh;
-            min-width: 177.77vh; /* 16:9 Aspect Ratio */
+        
+        .video-container iframe {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(1.2); /* Scale(1.2) crops the Drive buttons out */
-            filter: brightness(0.4);
+            width: 100vw;
+            height: 56.25vw; /* 16:9 ratio */
+            min-height: 100vh;
+            min-width: 177.77vh; /* 16:9 ratio */
+            transform: translate(-50%, -50%) scale(1.4); /* Scale up to hide YT controls/titles */
+            pointer-events: none;
+            filter: brightness(0.4) contrast(1.1);
         }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.08);
         }
     </style>
 </head>
-<body class="bg-black text-white font-sans">
+<body class="bg-black text-white font-sans selection:bg-white selection:text-black">
 
-    <div class="video-wrapper">
-        <iframe src="https://drive.google.com/file/d/1N6wwKtKjsd8Wya-945sJrayHqFzxDWTP/preview?autoplay=1" 
-                allow="autoplay"></iframe>
+    <div class="video-container">
+        <iframe 
+            src="https://www.youtube.com/embed/7T1E4vX-fgY?autoplay=1&mute=1&controls=0&loop=1&playlist=7T1E4vX-fgY&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1" 
+            frameborder="0" 
+            allow="autoplay; fullscreen">
+        </iframe>
     </div>
 
     <nav class="p-8 flex justify-between items-center relative z-10">
-        <h1 class="text-xl font-bold tracking-[0.3em] uppercase">Brandon Van</h1>
+        <h1 class="text-xl font-bold tracking-[0.4em] uppercase">Brandon Van</h1>
+        <div class="hidden md:flex space-x-10 text-[10px] uppercase tracking-widest opacity-60">
+            <a href="#" class="hover:opacity-100 transition">Work</a>
+            <a href="#" class="hover:opacity-100 transition">Scripts</a>
+            <a href="#" class="hover:opacity-100 transition">Contact</a>
+        </div>
     </nav>
 
     <main class="h-[70vh] flex flex-col justify-center items-center text-center px-4 relative z-10">
-        <h2 class="text-6xl md:text-8xl font-black mb-4 tracking-tighter">FILMMAKER</h2>
-        <p class="text-xs md:text-sm max-w-2xl text-gray-400 uppercase tracking-[0.5em]">Creative Direction &bull; Scriptwriting</p>
+        <h2 class="text-6xl md:text-9xl font-black mb-4 tracking-tighter italic">FILMMAKER</h2>
+        <p class="text-[10px] md:text-xs max-w-2xl text-white/40 uppercase tracking-[0.6em]">Visual Narrative &bull; Script Development</p>
     </main>
 
     <section class="py-24 px-8 relative z-10">
-        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="glass-card p-8 rounded-sm">
-                <h4 class="text-xl font-bold mb-4 uppercase">Script Vault</h4>
-                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Request access to my latest feature and short film screenplays.</p>
-                <button onclick="openModal('Script Vault')" class="border border-white px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition">Enter Vault</button>
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-card p-12 rounded-sm">
+                    <span class="text-[9px] text-white/30 uppercase tracking-[0.3em] mb-4 block italic">Feature / Noir</span>
+                    <h4 class="text-2xl font-bold mb-6 uppercase tracking-tight">Untitled Noir Project</h4>
+                    <button onclick="openModal('Untitled Noir Project')" class="group relative inline-flex items-center border border-white/20 px-8 py-3 text-[9px] uppercase tracking-widest hover:border-white transition-all duration-500">
+                        Request Access
+                    </button>
+                </div>
+
+                <div class="glass-card p-12 rounded-sm">
+                    <span class="text-[9px] text-white/30 uppercase tracking-[0.3em] mb-4 block italic">Short / Drama</span>
+                    <h4 class="text-2xl font-bold mb-6 uppercase tracking-tight">The Last Frame</h4>
+                    <button onclick="openModal('The Last Frame')" class="group relative inline-flex items-center border border-white/20 px-8 py-3 text-[9px] uppercase tracking-widest hover:border-white transition-all duration-500">
+                        Request Access
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
-    <div id="requestModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6 backdrop-blur-md">
-        <div class="bg-zinc-950 p-8 rounded-sm max-w-md w-full border border-zinc-800">
-            <h3 class="text-lg font-bold mb-4 uppercase tracking-widest">Request Access</h3>
-            <form action="https://formspree.io/f/your-id-here" method="POST" class="space-y-4">
-                <input type="text" name="name" placeholder="Name" class="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white">
-                <input type="email" name="email" placeholder="Email" class="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white">
-                <button type="submit" class="w-full py-3 bg-white text-black font-bold uppercase text-[10px] tracking-widest">Send Request</button>
-                <button type="button" onclick="closeModal()" class="w-full text-[10px] text-zinc-500 uppercase py-2">Cancel</button>
+    <div id="requestModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-6 backdrop-blur-md">
+        <div class="bg-zinc-950 p-10 rounded-sm max-w-md w-full border border-white/5 shadow-2xl">
+            <h3 class="text-xl font-bold mb-1 uppercase tracking-widest">Inquiry</h3>
+            <p id="scriptTitle" class="text-white/30 text-[9px] mb-10 uppercase tracking-widest italic"></p>
+            
+            <form action="https://formspree.io/f/your-id-here" method="POST" class="space-y-8">
+                <input type="text" name="name" placeholder="NAME" required class="w-full bg-transparent border-b border-white/10 py-3 text-[10px] tracking-widest focus:outline-none focus:border-white/50 transition">
+                <input type="email" name="_replyto" placeholder="EMAIL" required class="w-full bg-transparent border-b border-white/10 py-3 text-[10px] tracking-widest focus:outline-none focus:border-white/50 transition">
+                <textarea name="message" placeholder="MESSAGE" rows="2" class="w-full bg-transparent border-b border-white/10 py-3 text-[10px] tracking-widest focus:outline-none focus:border-white/50 transition resize-none"></textarea>
+                
+                <div class="flex flex-col space-y-6 pt-4">
+                    <button type="submit" class="w-full py-4 bg-white text-black font-bold uppercase text-[10px] tracking-[0.3em] hover:bg-zinc-200 transition">Send Request</button>
+                    <button type="button" onclick="closeModal()" class="text-[9px] uppercase tracking-[0.2em] text-white/30 hover:text-white transition">Return</button>
+                </div>
             </form>
         </div>
     </div>
 
     <script>
-        function openModal(title) { document.getElementById('requestModal').classList.remove('hidden'); }
-        function closeModal() { document.getElementById('requestModal').classList.add('hidden'); }
+        function openModal(title) {
+            document.getElementById('scriptTitle').innerText = title;
+            document.getElementById('requestModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('requestModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
     </script>
+
 </body>
 </html>
