@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brandonvan.com | Portfolio Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            filter: brightness(0.4); /* Dims video to make text pop */
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans">
 
+    <iframe class="video-background" 
+        src="https://drive.google.com/file/d/1N6wwKtKjsd8Wya-945sJrayHqFzxDWTP/preview?background=1&autoplay=1&loop=1&byline=0&title=0" 
+        frameborder="0" allow="autoplay; fullscreen">
+    </iframe>
+
+    <nav class="p-8 flex justify-between items-center relative z-10">
+        <h1 class="text-2xl font-bold tracking-widest uppercase">Brandon Van</h1>
+        <div class="space-x-6 text-sm uppercase tracking-tighter">
+            <a href="#" class="hover:text-gray-400 transition">Work</a>
+            <a href="#" class="hover:text-gray-400 transition">Scripts</a>
+            <a href="#" class="hover:text-gray-400 transition">Contact</a>
+        </div>
+    </nav>
+
+    <main class="h-screen flex flex-col justify-center items-center text-center px-4">
+        <h2 class="text-6xl md:text-8xl font-black mb-4">FILMMAKER</h2>
+        <p class="text-lg md:text-xl max-w-2xl text-gray-300">Creative Direction. Scriptwriting. Visual Storytelling.</p>
+    </main>
+
+    <section class="py-24 px-8 relative z-10">
+        <h3 class="text-3xl font-bold mb-12 text-center">The Script Vault</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="glass-card p-8 rounded-lg">
+                <span class="text-xs text-gray-400 uppercase tracking-widest">Feature Film</span>
+                <h4 class="text-xl font-bold mt-2 mb-4">Untitled Noir Project</h4>
+                <p class="text-sm text-gray-400 mb-6">A detective story set in the neon-soaked streets of a forgotten city.</p>
+                <button onclick="openModal('Untitled Noir Project')" class="w-full py-2 bg-white text-black font-bold hover:bg-gray-200 transition">Request Access</button>
+            </div>
+
+            <div class="glass-card p-8 rounded-lg">
+                <span class="text-xs text-gray-400 uppercase tracking-widest">Short Film</span>
+                <h4 class="text-xl font-bold mt-2 mb-4">The Last Frame</h4>
+                <p class="text-sm text-gray-400 mb-6">An aging projectionist discovers a hidden message in a vintage film reel.</p>
+                <button onclick="openModal('The Last Frame')" class="w-full py-2 bg-white text-black font-bold hover:bg-gray-200 transition">Request Access</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="requestModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 p-4">
+        <div class="bg-zinc-900 p-8 rounded-xl max-w-md w-full border border-zinc-700">
+            <h3 class="text-2xl font-bold mb-2">Request Access</h3>
+            <p id="scriptTitle" class="text-gray-400 text-sm mb-6"></p>
+            
+            <form action="https://formspree.io/f/your-id-here" method="POST" class="space-y-4">
+                <input type="text" name="name" placeholder="Your Name" class="w-full bg-zinc-800 p-3 rounded border border-zinc-700 focus:outline-none focus:border-white">
+                <input type="email" name="_replyto" placeholder="Your Email" class="w-full bg-zinc-800 p-3 rounded border border-zinc-700 focus:outline-none focus:border-white">
+                <textarea name="message" placeholder="Why do you want access?" class="w-full bg-zinc-800 p-3 rounded border border-zinc-700 focus:outline-none focus:border-white"></textarea>
+                
+                <div class="flex space-x-4">
+                    <button type="button" onclick="closeModal()" class="flex-1 py-3 text-gray-400 hover:text-white">Cancel</button>
+                    <button type="submit" class="flex-1 py-3 bg-white text-black font-bold rounded">Send Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title) {
+            document.getElementById('scriptTitle').innerText = "Requesting: " + title;
+            document.getElementById('requestModal').classList.remove('hidden');
+        }
+        function closeModal() {
+            document.getElementById('requestModal').classList.add('hidden');
+        }
+    </script>
+
+</body>
+</html>
